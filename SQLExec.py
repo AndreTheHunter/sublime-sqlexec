@@ -83,7 +83,7 @@ class Command:
 
     def run(self):
         sublime.status_message(' SQLExec: running SQL command')
-        results, errors = subprocess.Popen(self.text, stdout=subprocess.PIPE,stderr=subprocess.PIPE, shell=True).communicate()
+        results, errors = subprocess.Popen(self.text, stdout=subprocess.PIPE,stderr=subprocess.PIPE, shell=True, env=os.environ.copy()).communicate()
 
         if not results and errors:
             self._errors(errors.decode('utf-8', 'replace').replace('\r', ''))
